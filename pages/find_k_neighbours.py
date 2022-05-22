@@ -80,6 +80,19 @@ def single_image_neighbours_info_as_dict(E_test_flatten, knn, art_info):
     return related_images
 
 
+def download_model(model_directory="PipelineTest", bucket=BUCKET_NAME):
+    client = storage.Client().bucket(bucket)
+
+    storage_location = 'models/{}/versions/{}/{}'.format(
+        MODEL_NAME,
+        model_directory,
+        'model.joblib')
+    blob = client.blob(storage_location)
+    blob.download_to_filename('model.joblib')
+    print("=> pipeline downloaded from storage")
+    model = joblib.load('model.joblib')
+    return model
+
 def find_k_neighbours(image = "images/test_images/26601.jpeg", transform = True, vggmodel = vggmodel,
                         knnmodel=knn, file_location = "data/abstract_ex.csv"):
     image = [np.asarray(image)]
