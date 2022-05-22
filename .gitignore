@@ -1,0 +1,10 @@
+.env
+.DS_Store
+/__pycache__/
+raw_data
+pages/__pycache__
+__pycache__
+__pycache__/
+*.pyc
+*.jpg
+models/knnpickle_file
