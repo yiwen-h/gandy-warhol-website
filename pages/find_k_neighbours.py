@@ -6,16 +6,17 @@ import numpy as np
 import pandas as pd
 from google.cloud import storage
 import joblib
-
+import os
 
 def download_model(bucket="gandywarhol-yh"):
     client = storage.Client().bucket(bucket)
     blob = client.blob('knnmodel.joblib')
-    model = blob.download_to_filename('knnmodel.joblib')
-    return model
+    blob.download_to_filename('models/knnmodel.joblib')
+    knn = joblib.load('models/knnmodel.joblib')
+    os.remove('models/knnmodel.joblib')
+    return knn
 
-knnfile = download_model()
-knn = joblib.load(knnfile)
+knn = download_model()
 vgg = "models/vgg19_autoencoder.h5"
 vggmodel = load_model(vgg)
 vggmodel.compile()

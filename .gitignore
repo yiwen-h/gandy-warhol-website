@@ -8,3 +8,5 @@ __pycache__/
 *.pyc
 *.jpg
 models/knnpickle_file
+knnmodel.joblib
+models/knnmodel.joblib
